@@ -7,7 +7,9 @@ from django.utils import timezone
 
 def welcome(request):
 	continents = Continent.objects.all()
-	return render(request,"helloworld/welcome.html",{"continents": continents})
+	north_america = Continent.objects.get(name="North America")
+	canada = Country.objects.get(name="Canada")
+	return render(request,"helloworld/welcome.html",{"continents": continents, "north_america": north_america, "canada": canada})
 	#return HttpResponse("testing welcome")
 
 def continent(request, continent_id):
