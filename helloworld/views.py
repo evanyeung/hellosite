@@ -17,4 +17,10 @@ def country_comment(request,continent_id, country_id):
 	#return HttpResponse("country %s continent %s" % (country_id,continent_id)) 
 	return render(request,"helloworld/country_comment.html",{"country":chosen_country})
 
+def get_message(request,continent_id,country_id):
+	chosen_country = Country.objects.get(pk=country_id)
+	new_message = Message(author = request.POST["message_author"],
+		message = request.POST["message_message"],country = chosen_country)
+	return HttpResponseRedirect(reverse('country_comment', args=(continent_id,country_id)))
+
 
