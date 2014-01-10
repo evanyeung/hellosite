@@ -1,6 +1,5 @@
 from django.db import models
 
-class countries(model.Model):
 # Create your models here.
 class Continent(models.Models):
 	name = models.CharField(max_length=10)
