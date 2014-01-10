@@ -4,14 +4,14 @@
 <html>
 <head>
 	<title>{% block title %}{% endblock %}</title>
-	<link rel="stylesheet" type="text/css" href="{% static helloworld/dist/css/bootstrap.min.css %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'helloworld/dist/css/bootstrap.min.css' %}" />
 
 	{% block extra_stylesheets %}
 	{% endblock %}
 
 </head>
 <body>
-{% block header %}
+{% block header %}{% comment %}
 	<div class="row">
 		<div class="col-md-12">
 			<div class="navbar navbar-default">
@@ -30,16 +30,16 @@
   					<ul class="nav navbar-nav">
   						{% for cont in continents %}
   							{% ifequal cont.id continent.id %}
-  								<li class="active"><a href="#">cont.name</a></li>
+  								<li class="active"><a href="{% url 'continent' {{ cont.id }} %}">{{ cont.name }}</a></li>
   							{% else %}
-  								<li><a href="#">cont.name</a></li>
+  								<li><a href="{% url 'continent' {{ cont.id }}">{{ cont.name }}</a></li>
   							{% endif %}
   						{% endfor %}
   					</ul>
   				</div><!--navbar body-->
 			</div><!--navbar-->
 		</div><!--col-->
-	</div><!--row1-->
+	</div><!--row1--> {% endcomment %}
 {% endblock %}
 {% block content %}{% endblock %}
 {% block footer %}{% endblock %}
