@@ -23,4 +23,4 @@ class Message(models.Model):
 	pub_date = models.DateTimeField('date published')
 
 	def __unicode__(self):
-		return self.country + self.author
+		return self.author
