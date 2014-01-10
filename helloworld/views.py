@@ -22,7 +22,7 @@ def country_comment(request,continent_id, country_id):
 
 	continents = Continent.objects.all()
 	chosen_continent = Continent.objects.get(pk=continent_id)
-	chosen_country = get_object_or_404(chosen_continent.country_set.all(), pk=country.id) 
+	chosen_country = get_object_or_404(chosen_continent.country_set.all(), pk=country_id) 
 	return render(request,"helloworld/country_comment.html",{"country":chosen_country, "continents": continents})
 	#return HttpResponse("country %s continent %s" % (country_id,continent_id))
 
