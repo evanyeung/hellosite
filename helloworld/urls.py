@@ -3,5 +3,6 @@ from helloworld import views
 
 urlpatterns = patterns('',
     url(r'^$', views.welcome,name="welcome"),
-    url(r'^(?P<continent_id>\d+)/$',view.countries,name="countries"),
-    url(r'^(?P<continent_id>\d+))
+    url(r'^(?P<continent_id>\d+)/$',views.continent,name="continent"),
+    url(r'^(?P<country_id>\d+)/$',views.country_comment, name = "country_comment"),
+    )
