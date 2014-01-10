@@ -20,6 +20,7 @@ class Message(models.Model):
 	country = models.OneToOneField(Country)
 	author = models.CharField(max_length=50)
 	message = models.CharField(max_length=500)
+	pub_date = models.DateTimeField('date published')
 
 	def __unicode__(self):
 		return self.country + self.author
