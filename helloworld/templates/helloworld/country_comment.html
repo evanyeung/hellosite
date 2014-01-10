@@ -1,5 +1,16 @@
 {% extends 'helloworld/base.html' %}
 
 {% block content %}
-	<p>Country: {{ country.name }}</p>
+<div class="row">
+	<div class="col-md-12">
+		<div class="navbar navbar-default">
+			<p>Country: {{ country.name }}</p>
+			<p>Population: {{country.population}}</p>
+		</div>
+	</div>
+</div>
+
+<form action="{% url 'get_message' 
+
 {% endblock %}
+
