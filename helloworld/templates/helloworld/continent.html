@@ -1,5 +1,13 @@
 {% extends 'helloworld/base.html' %}
 
 {% block content %}
-	<p>Continent: {{ continent.name }}</p>
+<div class="row">
+	<div class="col-md-4">Continent: {{ continent.name }}</div>
+	<div class="col-md-4">Area:{{continent.area}}</div>
+</div>
+
+<div class="row">
+	{%for each_country in continent.country_set.all %}
+	<div class="col-md-1"><a href="{% url 'country_comment' continent.id each_country.id%}">{{each_country.name}} </a></div>
+	{% endfor %}
 {% endblock %}
