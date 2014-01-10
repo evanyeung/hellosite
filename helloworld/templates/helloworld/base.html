@@ -15,6 +15,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="navbar navbar-default">
+				<!--For small screen size it collapses the navbar-->
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 			    	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -23,7 +24,7 @@
 			      		<span class="icon-bar"></span>
 			      		<span class="icon-bar"></span>
 			    	</button>
-			    	<a class="navbar-brand" href="#">SAY HELLO TO:</a>
+			    	<a class="navbar-brand" href="{% url 'welcome' %}">SAY HELLO TO:</a>
 			  	</div><!--navbar header-->
 			  	<!-- Collect the nav links, forms, and other content for toggling -->
   				<div class="collapse navbar-collapse">
