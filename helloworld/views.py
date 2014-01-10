@@ -21,7 +21,7 @@ def country_comment(request,continent_id, country_id):
 	chosen_continent = get_object_or_404(Continent, pk=continent_id)
 	chosen_country = get_object_or_404(chosen_continent.country_set.all(), pk=country_id)
 	if(chosen_country):
-		messages = chosen_country.message_set.order_by('pub_date')[:5]
+		messages = chosen_country.message_set.order_by('-pub_date')[:5]
 	return render(request,"helloworld/country_comment.html",{"country":chosen_country, "continents": continents, "messages": messages})
 	#return HttpResponse("country %s continent %s" % (country_id,continent_id))
 

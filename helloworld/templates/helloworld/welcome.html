@@ -1,4 +1,5 @@
 {% extends 'helloworld/base.html' %}
+{% load staticfiles %}
 
 {% block extra_stylesheets %}
 <style>
@@ -6,6 +7,12 @@
 {
 	margin: 0;
 	padding: 0;
+}
+
+img
+{
+	height: 100%;
+	width: 80%;
 }
 
 .continent_list_item 
@@ -19,23 +26,30 @@
 {% block content %}
 	<div class="row">
 		<div class="col-md-11 col-md-offset-1">
-			<div class="jumbotron">
-				<h1>
-					Hello, World!<br/>
-					<small>Visit a continent to say hello</small>
-				</h1>
-				<ul id="continent_list">
-					{% for cont in continents %}
-						<li class="continent_list_item">
-							<a href="{% url 'continent' cont.id %}">
-							{{ cont.name }}
-							{% if not forloop.last %}
-								|
-							{% endif %}
-							</a>
-						</li>
-					{% endfor %}
-				</ul>
+			<div class="row">
+				<div class="jumbotron">
+					<div class="col-md-8">
+						<h1>
+							Hello, World!<br/>
+							<small>Visit a continent to say hello</small>
+						</h1>
+						<ul id="continent_list">
+							{% for cont in continents %}
+								<li class="continent_list_item">
+									<a href="{% url 'continent' cont.id %}">
+									{{ cont.name }}	
+									{% if not forloop.last %}
+										|
+									{% endif %}
+									</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+					<div class="col-md-4">
+						<img src="{% static 'images/world.png' %}"  />
+					</div>
+				</div><!--inner row-->
 			</div><!--jumbotron-->
 		</div>
 	</div><!--row1-->

@@ -2,12 +2,39 @@
 
 {% block content %}
 <div class="row">
-	<div class="col-md-4">Continent: {{ continent.name }}</div>
-	<div class="col-md-4">Area:{{continent.area}}</div>
-</div>
+	<div class="col-md-11 col-md-offset-1">
+		<div class="jumbotron">
+			<h1>
+			{{ continent.name }}
+			<small>It's cold here</small>
+			</h1>
+		</div><!--jumbotron-->
+	</div>
+</div><!--row-->
 
 <div class="row">
-	{%for each_country in continent.country_set.all %}
-	<div class="col-md-1"><a href="{% url 'country_comment' continent.id each_country.id%}"><button type="button" class="btn btn-info">{{each_country.name}} </button></a></div>
-	{% endfor %}
+	<div class="col-md-11 col-md-offset-1">
+		<!-- Button trigger modal -->
+		<button class="btn btn-lg" data-toggle="modal" data-target="#country-modal">
+		  Choose Country
+		</button>
+
+
+		<div class="modal fade" id="country-modal" role="dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  			<div class="modal-dialog">
+    			<div class="modal-content">
+      				<div class="modal-header">
+      					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      					<h4 class="modal-title">Countries</h4>
+      				</div><!--modal header-->
+      				<div class="modal-body">
+      					{% for country in continent.country_set.all %}
+      						<a href="{% url 'country_comment' continent.id country.id %}" class="btn btn-default">{{ country.name }}</a>
+      					{% endfor %}
+      				</div><!--modal-body-->
+      			</div><!--modal-content-->
+      		</div><!--modal-dialog-->
+      	</div><!--modal-->
+	</div><!--column-->
+</div><!--row-->
 {% endblock %}
