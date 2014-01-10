@@ -17,7 +17,7 @@ class Country(models.Model):
 		return self.name
 
 class Message(models.Model):
-	country = models.OneToOneField(Country)
+	country = models.ForeignKey(Country)
 	author = models.CharField(max_length=50)
 	message = models.CharField(max_length=500)
 	pub_date = models.DateTimeField('date published')
