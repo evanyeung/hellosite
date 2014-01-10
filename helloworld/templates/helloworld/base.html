@@ -11,7 +11,7 @@
 
 </head>
 <body>
-{% block header %}{% comment %}
+{% block navbar %}
 	<div class="row">
 		<div class="col-md-12">
 			<div class="navbar navbar-default">
@@ -30,16 +30,16 @@
   					<ul class="nav navbar-nav">
   						{% for cont in continents %}
   							{% ifequal cont.id continent.id %}
-  								<li class="active"><a href="{% url 'continent' {{ cont.id }} %}">{{ cont.name }}</a></li>
+  								<li class="active"><a href="{% url 'continent' cont.id %}">{{ cont.name }}</a></li>
   							{% else %}
-  								<li><a href="{% url 'continent' {{ cont.id }}">{{ cont.name }}</a></li>
-  							{% endif %}
+  								<li><a href="{% url 'continent' cont.id %}">{{ cont.name }}</a></li>
+  							{% endifequal %}
   						{% endfor %}
   					</ul>
   				</div><!--navbar body-->
 			</div><!--navbar-->
 		</div><!--col-->
-	</div><!--row1--> {% endcomment %}
+	</div><!--row1-->
 {% endblock %}
 {% block content %}{% endblock %}
 {% block footer %}{% endblock %}
