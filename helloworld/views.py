@@ -20,8 +20,7 @@ def continent(request, continent_id):
 def country_comment(request, country_id):
 	continents = Continent.objects.all()
 	chosen_country = get_object_or_404(Country, pk=country_id)
-	if(chosen_country):
-		messages = chosen_country.message_set.order_by('-pub_date')[:5]
+	messages = chosen_country.message_set.order_by('-pub_date')[:5]
 	return render(request,"helloworld/country_comment.html",{"country":chosen_country, "continents": continents, "messages": messages})
 
 

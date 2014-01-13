@@ -31,6 +31,9 @@
 	<div class="row">
 		<br/>
 		<div class="col-md-6" id="form-area">
+			{% if error %}
+				{{ error }}
+			{% endif %}
 			<form role="form" action="{% url 'get_message' country.id %}" method="post">
 			{% csrf_token %}
 				<div class="form-group">
