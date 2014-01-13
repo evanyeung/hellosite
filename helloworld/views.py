@@ -25,7 +25,15 @@ def country_comment(request, country_id):
 
 
 def get_message(request,country_id):
-	chosen_country = Country.objects.get(pk=country_id)
+	chosen_country = get_object_or_404(Country, pk=country_id)
+	if (not request.POST["message_author"])
+	{
+		return render(request, "country_comment.html", {"country":chosen_country, "continents": continents, "messages": messages, "error": "You did not enter an author!"})
+	}
+	elif(not request.POST["message_message"])
+	{
+		return render(request, "country_comment.html", {"country":chosen_country, "continents": continents, "messages": messages, "error": "You did not select a message!"})
+	}
 	new_message = Message(author = request.POST["message_author"],
 						  message = request.POST["message_message"],
 						  country = chosen_country,
