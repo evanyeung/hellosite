@@ -1,19 +1,15 @@
-
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>{% block title %}{% endblock %}</title>
-<<<<<<< HEAD
 	<!--link rel="stylesheet" type="text/css" href="{% static 'helloworld/dist/css/bootstrap.min.css' %}" /-->
-	<link rel="stylesheet"  type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-=======
 
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
->>>>>>> change_urls
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
 
 	{% block extra_stylesheets %}
 	{% endblock %}
