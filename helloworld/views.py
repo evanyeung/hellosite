@@ -32,7 +32,7 @@ def get_message(request,country_id):
 	if (not request.POST["message_author"]):
 		return render(request, "helloworld/country_comment.html", {"country":chosen_country, "continents": continents, "messages": messages, "error": "You did not enter an author!"})
 	elif(not request.POST["message_message"]):
-		return render(request, "helloworld/country_comment.html", {"country":chosen_country, "continents": continents, "messages": messages, "error": "You did not select a message!"})
+		return render(request, "helloworld/country_comment.html", {"country":chosen_country, "continents": continents, "messages": messages, "error": "You did not enter a message!"})
 		
 	new_message = Message(author = request.POST["message_author"],
 						  message = request.POST["message_message"],
