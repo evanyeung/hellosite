@@ -7,27 +7,25 @@ from django.utils import timezone
 
 def welcome(request):
 	continents = Continent.objects.all()
-	north_america = Continent.objects.get(name="North America")
 	canada = Country.objects.get(name="Canada")
-	return render(request,"helloworld/welcome.html",{"continents": continents, "north_america": north_america, "canada": canada})
-	#return HttpResponse("testing welcome")
+	return render(request,"helloworld/welcome.html",{"continents": continents, "canada": canada})
+
 
 def continent(request, continent_id):
 	continents = Continent.objects.all()
 	chosen_continent = get_object_or_404(Continent, pk=continent_id)
 	return render(request,"helloworld/continent.html",{"continent":chosen_continent, "continents": continents})
-	#return HttpResponse("continent %s" % continent_id)
 
-def country_comment(request,continent_id, country_id):
+
+def country_comment(request, country_id):
 	continents = Continent.objects.all()
-	chosen_continent = get_object_or_404(Continent, pk=continent_id)
-	chosen_country = get_object_or_404(chosen_continent.country_set.all(), pk=country_id)
+	chosen_country = get_object_or_404(Country, pk=country_id)
 	if(chosen_country):
 		messages = chosen_country.message_set.order_by('-pub_date')[:5]
 	return render(request,"helloworld/country_comment.html",{"country":chosen_country, "continents": continents, "messages": messages})
-	#return HttpResponse("country %s continent %s" % (country_id,continent_id))
 
-def get_message(request,continent_id,country_id):
+
+def get_message(request,country_id):
 	chosen_country = Country.objects.get(pk=country_id)
 	new_message = Message(author = request.POST["message_author"],
 						  message = request.POST["message_message"],
@@ -35,6 +33,6 @@ def get_message(request,continent_id,country_id):
 						  pub_date = timezone.now()
 						  )
 	new_message.save()
-	return HttpResponseRedirect(reverse('country_comment', args=(continent_id, country_id)))
+	return HttpResponseRedirect(reverse('country_comment', args=(country_id,)))
 
 

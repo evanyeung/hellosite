@@ -29,7 +29,7 @@
 <div class="row">
 	<br/>
 	<div class="col-md-5 col-md-offset-1" id="form-area">
-		<form role="form" action="{% url 'get_message' country.continent.id country.id %}" method="post">
+		<form role="form" action="{% url 'get_message' country.id %}" method="post">
 		{% csrf_token %}
 			<div class="form-group">
 				<label for="author">Your Name</label>
