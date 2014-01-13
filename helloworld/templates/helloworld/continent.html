@@ -1,16 +1,18 @@
 {% extends 'helloworld/base.html' %}
 
 {% block content %}
-<div class="row">
-	<div class="col-md-11 col-md-offset-1">
-		<div class="jumbotron">
-			<h1>
-			{{ continent.name }}
-			<small>{{ continent.area }} square km</small>
-			</h1>
-		</div><!--jumbotron-->
-	</div>
-</div><!--row-->
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="jumbotron">
+				<h1>
+				{{ continent.name }}
+				<small>{{ continent.area }} square km</small>
+				</h1>
+			</div><!--jumbotron-->
+		</div>
+	</div><!--row-->
+</div>
 
 <div class="row">
 	<br/><br/><br/>
