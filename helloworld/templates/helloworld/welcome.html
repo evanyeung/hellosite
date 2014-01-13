@@ -39,10 +39,10 @@ img
 								<li class="continent_list_item">
 									<a href="{% url 'continent' cont.id %}">
 									{{ cont.name }}	
-									{% if not forloop.last %}
-										|
-									{% endif %}
 									</a>
+									{% if not forloop.last %}
+										<a style="text-decoration: none;">|</a><!--make '|' blue-->
+									{% endif %}
 								</li>
 							{% endfor %}
 						</ul>
