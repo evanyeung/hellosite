@@ -42,4 +42,9 @@ def get_message(request,country_id):
 	new_message.save()
 	return HttpResponseRedirect(reverse('country_comment', args=(country_id,)))
 
+class comment_ajax(View):
+
+	def post(self, request):
+		pass
+
 
