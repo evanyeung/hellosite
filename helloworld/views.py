@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.views.generic.base import View
 
 import simplejson as json
+from django.core import serializers
 # Create your views here.
 
 def welcome(request):
@@ -57,8 +58,8 @@ class ajax(View):
 						  )
 		new_message.save()
 
-		data = {'messages': chosen_country.message_set.order_by('-pub_date')[:5] }
+		data = serializers.serialize('json', chosen_country.message_set.order_by('-pub_date')[:5])
 
 
-		return HttpResponse(json.dumps(data), content_type='application/json')
+		return HttpResponse(data, content_type='application/json')
 
