@@ -34,7 +34,7 @@
 			{% if error %}
 				<p style="color: red; font-weight: bold">{{ error }}</p>
 			{% endif %}
-			<form role="form" action="{% url 'get_message' country.id %}" method="post">
+			<form role="form" action="{% url 'ajax' %}" method="post">
 			{% csrf_token %}
 				<div class="form-group">
 					<label for="author">Your Name</label>
@@ -44,10 +44,10 @@
 					<label for="message">Message</label>
 					<textarea class="form-control" rows="5" id="message" name="message_message" placeholder="Enter your message"></textarea>
 				</div><!--form-group-->
-				<button type="submit" class="btn btn-default">Submit</button>
+				<button id="comment-submit" type="submit" class="btn btn-default" name="country_id" value="{{ country.id }}">Submit</button>
 			</form>
 		</div><!--col-->
-		<div class="col-md-6">
+		<div class="col-md-6" id="message-col">
 			{% for message in messages %}
 			<div class="row">
 				<div class="col-md-10 col-md-offset-2 message-div">

@@ -3,6 +3,9 @@ from helloworld.models import Continent ,Country, Message
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils import timezone
+from django.views.generic.base import View
+
+import simplejson as json
 # Create your views here.
 
 def welcome(request):
@@ -42,9 +45,20 @@ def get_message(request,country_id):
 	new_message.save()
 	return HttpResponseRedirect(reverse('country_comment', args=(country_id,)))
 
-class comment_ajax(View):
+class ajax(View):
 
 	def post(self, request):
-		pass
+		chosen_country = get_object_or_404(Country, pk=request.POST['country_id'])
 
+		new_message = Message(author = request.POST["message_author"],
+						  message = request.POST["message_message"],
+						  country = chosen_country,
+						  pub_date = timezone.now()
+						  )
+		new_message.save()
+
+		data = {'messages': chosen_country.message_set.order_by('-pub_date')[:5] }
+
+
+		return HttpResponse(json.dumps(data), content_type='application/json')
 
