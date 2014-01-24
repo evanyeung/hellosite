@@ -34,7 +34,7 @@
 			{% if error %}
 				<p style="color: red; font-weight: bold">{{ error }}</p>
 			{% endif %}
-			<form role="form">
+			<form role="form" method="POST">
 			{% csrf_token %}
 				<div class="form-group">
 					<label for="author">Your Name</label>
