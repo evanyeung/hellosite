@@ -21,9 +21,10 @@ $( document ).ready(function() {
 	});
 
 	$("#comment-submit").click(function() {
+		/*
 		$.ajax({
 			url: 'http://localhost:8000/helloworld/ajax/',
-			type: 'GET'
+			type: 'POST'
 			//dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
 			//data: {'datat': 'testing'}
 		})
@@ -36,13 +37,16 @@ $( document ).ready(function() {
 		})
 		.always(function() {
 			console.log("complete");
-		});
-		//var url = 'localhost:8000/helloworld/ajax/';
-		/*$.post('http://localhost:8000/helloworld/ajax/',{'name': 'country'}, function( data, status ) {
+		}); */
+		var url = 'localhost:8000/helloworld/ajax/';
+		var form_data = $('form').serialize();
+		$.post('http://localhost:8000/helloworld/ajax/', form_data, function( data, status ) {
 			console.log(status)
-			alert("called"); });
-			/*data = json.parse( data )
-			var message_html = ""
+			alert("hi")
+			console.log(data)
+			
+			data = $.parseJSON( data );
+			var message_html = "";
 			for(var i = 0; i < len(data); i++) {
 				console.log("message "  + i);
 				message_html += "<div class='row'>" +
@@ -53,7 +57,7 @@ $( document ).ready(function() {
 									"</div></div><!--row--><br/>"
 			}
 			$("#message-col").html(message_html);
-		});*/
+		});
 
 	});
 });

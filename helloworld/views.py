@@ -45,7 +45,7 @@ def get_message(request,country_id):
 						  )
 	new_message.save()
 	return HttpResponseRedirect(reverse('country_comment', args=(country_id,)))
-
+'''
 def ajax(request):
 	if request.is_ajax():
 		print "ajax"
@@ -53,16 +53,12 @@ def ajax(request):
 	else:
 		print "getted"
 		return HttpResponse("get")
-
 '''
+
 class ajax(View):
-	def get(self, request):
-		print "getted"
-		return HttpResponse("get")
 
 	def post(self, request):
-		print "posted"
-		return HttpResponse("posted")
+
 		chosen_country = get_object_or_404(Country, pk=request.POST['country_id'])
 
 		new_message = Message(author = request.POST["message_author"],
@@ -74,9 +70,8 @@ class ajax(View):
 
 		data = serializers.serialize('json', chosen_country.message_set.order_by('-pub_date')[:5])
 
+		return HttpResponse(obj, content_type='application/json')
 
-		return HttpResponse(data, content_type='application/json')
-'''
 
 def form_test(request):
 	return render(request,"helloworld/form_test.html")
