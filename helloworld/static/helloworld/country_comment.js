@@ -7,9 +7,9 @@ $( document ).ready(function() {
 	}
 	$.ajaxSetup({
 		//contentType: "application/x-www-form-urlencoded",
-		success: function(){alert("success"); console.log("success");},
-		error: function(){alert("error"); console.log("success");},
-		complete: function(){alert("complete"); console.log("complete");},
+		//success: function(){alert("success"); console.log("success");},
+		//error: function(){alert("error"); console.log("success");},
+		//complete: function(){alert("complete"); console.log("complete");},
 		crossDomain: false, // obviates need for sameOrigin test
 		beforeSend: function(xhr, settings) {
 			if (!csrfSafeMethod(settings.type)) {
@@ -20,8 +20,25 @@ $( document ).ready(function() {
 
 	$("#comment-submit").click(function() {
 		alert("clicked");
+		$.ajax({
+			url: 'http://localhost:8000/helloworld/ajax/',
+			type: 'GET'
+			//dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+			//data: {'datat': 'testing'}
+		})
+		.done(function() {
+			console.log("success");
+			alert("success");
+		})
+		.fail(function() {
+			console.log("error");
+			alert("fail");
+		})
+		.always(function() {
+			console.log("complete");
+		});
 		//var url = 'localhost:8000/helloworld/ajax/';
-		$.post('http://localhost:8000/helloworld/ajax/',{'name': 'country'}, function( data, status ) {
+		/*$.post('http://localhost:8000/helloworld/ajax/',{'name': 'country'}, function( data, status ) {
 			console.log(status)
 			alert("called"); });
 			/*data = json.parse( data )

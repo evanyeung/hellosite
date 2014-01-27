@@ -46,13 +46,22 @@ def get_message(request,country_id):
 	new_message.save()
 	return HttpResponseRedirect(reverse('country_comment', args=(country_id,)))
 
+def ajax(request):
+	if request.is_ajax():
+		print "ajax"
+		return HttpResponse("ajax")
+	else:
+		print "getted"
+		return HttpResponse("get")
+
+'''
 class ajax(View):
 	def get(self, request):
-		print "getted";
+		print "getted"
 		return HttpResponse("get")
 
 	def post(self, request):
-		print "posted";
+		print "posted"
 		return HttpResponse("posted")
 		chosen_country = get_object_or_404(Country, pk=request.POST['country_id'])
 
@@ -67,4 +76,4 @@ class ajax(View):
 
 
 		return HttpResponse(data, content_type='application/json')
-
+'''
