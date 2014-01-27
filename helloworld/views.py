@@ -49,7 +49,7 @@ def get_message(request,country_id):
 def ajax(request):
 	if request.is_ajax():
 		print "ajax"
-		return HttpResponse("ajax")
+		return HttpResponse("It Worked!!")
 	else:
 		print "getted"
 		return HttpResponse("get")
@@ -77,3 +77,6 @@ class ajax(View):
 
 		return HttpResponse(data, content_type='application/json')
 '''
+
+def form_test(request):
+	return render(request,"helloworld/form_test.html")

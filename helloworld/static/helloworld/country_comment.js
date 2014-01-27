@@ -7,9 +7,11 @@ $( document ).ready(function() {
 	}
 	$.ajaxSetup({
 		//contentType: "application/x-www-form-urlencoded",
+		
 		//success: function(){alert("success"); console.log("success");},
 		//error: function(){alert("error"); console.log("success");},
 		//complete: function(){alert("complete"); console.log("complete");},
+
 		crossDomain: false, // obviates need for sameOrigin test
 		beforeSend: function(xhr, settings) {
 			if (!csrfSafeMethod(settings.type)) {
@@ -19,7 +21,6 @@ $( document ).ready(function() {
 	});
 
 	$("#comment-submit").click(function() {
-		alert("clicked");
 		$.ajax({
 			url: 'http://localhost:8000/helloworld/ajax/',
 			type: 'GET'
@@ -28,7 +29,6 @@ $( document ).ready(function() {
 		})
 		.done(function() {
 			console.log("success");
-			alert("success");
 		})
 		.fail(function() {
 			console.log("error");

@@ -7,4 +7,5 @@ urlpatterns = patterns('',
     url(r'^country/(?P<country_id>\d+)/$',views.country_comment, name = "country_comment"),
     url(r'^message/(?P<country_id>\d+)/$',views.get_message, name = "get_message"),
     url(r'^ajax/$', views.ajax, name = "ajax"),
+    url(r'^form_test/$', views.form_test, name = "form_test"),
     )
