@@ -1,0 +1,86 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<!--link rel="stylesheet" type="text/css" href="{% static 'helloworld/dist/css/bootstrap.min.css' %}" /-->
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+
+	{% block dropdown_style %}
+	<style>
+		ul.nav li.dropdown:hover > ul.dropdown-menu 
+		{
+    		display: block;
+		}
+	</style>
+	{% endblock %}
+
+	{% block extra_stylesheets %}
+	{% endblock %}
+
+</head>
+<body>
+{% block navbar %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="navbar navbar-default ">
+					<!--For small screen size it collapses the navbar-->
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+				    	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				      		<span class="sr-only">Toggle navigation</span>
+				      		<span class="icon-bar"></span>
+				      		<span class="icon-bar"></span>
+				      		<span class="icon-bar"></span>
+				    	</button>
+				    	<a class="navbar-brand" href="{% url 'welcome' %}">SAY HELLO TO:</a>
+				  	</div><!--navbar header-->
+				  	<!-- Collect the nav links, forms, and other content for toggling -->
+	  				<div class="collapse navbar-collapse">
+	  					<ul class="nav navbar-nav">
+	  						{% for cont in continents %}
+	  							{% ifequal cont.id continent.id %}
+	  								<li class="active dropdown">
+  										<a  id="drop{{ cont }}" href="{% url 'continent' cont.id %}">{{ cont.name }}</a>
+	  									<ul class="dropdown-menu" role="menu" aria-labelledby="drop{{ cont }}">
+	  										{% for country in cont.country_set.all %}
+	  										<li><a href="{% url 'country_comment' country.id %}">{{ country.name }}</a></li>
+	  										{% endfor %}
+	  									</ul>
+  									</li>
+	  							{% else %}
+	  								<li class="dropdown">
+  										<a id="drop{{ cont }}" href="{% url 'continent' cont.id %}">{{ cont.name }}</a>
+	  									<ul class="dropdown-menu" role="menu" aria-labelledby="drop{{ cont }}">
+	  										{% for country in cont.country_set.all %}
+	  										<li><a href="{% url 'country_comment' country.id %}">{{ country.name }}</a></li>
+	  										{% endfor %}
+	  									</ul>
+  									</li>
+	  							{% endifequal %}
+	  						{% endfor %}
+	  					</ul>
+	  				</div><!--navbar body-->
+				</div><!--navbar-->
+			</div><!--col-->
+		</div><!--row1-->
+	</div>
+{% endblock %}
+{% block content %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block js_files %}
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<!--script src="{% static 'helloworld/dist/js/bootstrap.min.js' %}"></script-->
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+{% endblock %}
+</body>
+</html>
