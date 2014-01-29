@@ -5,6 +5,9 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.views.generic.base import View
 
+from django.template.loader import get_template
+from django.template import Context
+
 import simplejson as json
 from django.core import serializers
 # Create your views here.
@@ -68,9 +71,13 @@ class ajax(View):
 						  )
 		new_message.save()
 
-		data = serializers.serialize('json', chosen_country.message_set.order_by('-pub_date')[:5])
-
-		return HttpResponse(obj, content_type='application/json')
+		data = {}
+		t = get_template('helloworld/comment_list.html')
+		c = Context({'messages': chosen_country.message_set.order_by('-pub_date')[:5]})
+		data = t.render(c)
+		#data["html"] = str(render(request, 'helloworld/comment_list.html', chosen_country.message_set.order_by('-pub_date')[:5]))
+		#data = json.dumps( {"hello": "<p>Hello</p>"} )
+		return HttpResponse( json.dumps(data), content_type='application/json')
 
 
 def form_test(request):

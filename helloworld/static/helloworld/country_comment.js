@@ -40,12 +40,12 @@ $( document ).ready(function() {
 		}); */
 		var url = 'localhost:8000/helloworld/ajax/';
 		var form_data = $('form').serialize();
-		$.post('http://localhost:8000/helloworld/ajax/', form_data, function( data, status ) {
-			console.log(status)
-			alert("hi")
-			console.log(data)
-			
-			data = $.parseJSON( data );
+		$.post('http://localhost:8000/helloworld/ajax/', form_data, function( data, status ) {	
+			$('form').each( function() {
+				this.reset();
+			});
+			$("#message-col").html(data);
+			/*
 			var message_html = "";
 			for(var i = 0; i < len(data); i++) {
 				console.log("message "  + i);
@@ -55,8 +55,8 @@ $( document ).ready(function() {
 										"<p>Message:" + data[i].fields.message + "</p>" +
 										"<p>date posted:" + data[i].fields.pub_date + "</p>" +
 									"</div></div><!--row--><br/>"
-			}
-			$("#message-col").html(message_html);
+			
+			}*/
 		});
 
 	});
