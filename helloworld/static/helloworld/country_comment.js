@@ -38,9 +38,9 @@ $( document ).ready(function() {
 		.always(function() {
 			console.log("complete");
 		}); */
-		var url = 'localhost:8000/helloworld/ajax/';
+		var url = '../../../helloworld/ajax/';
 		var form_data = $('form').serialize();
-		$.post('http://localhost:8000/helloworld/ajax/', form_data, function( data, status ) {	
+		$.post('../../../helloworld/ajax/', form_data, function( data, status ) {	
 			$('form').each( function() {
 				this.reset();
 			});
