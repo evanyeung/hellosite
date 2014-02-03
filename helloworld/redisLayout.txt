@@ -1,0 +1,10 @@
+k continent:[id] [obj]
+h continent:by:name [name] [id]
+
+k country:[id] [obj]
+h country:by:name [name] [id]
+
+
+k message:[id] [obj]
+s messages:in:country [id]
+z messages:by:date [id]
