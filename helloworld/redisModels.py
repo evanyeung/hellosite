@@ -1,4 +1,6 @@
-
+'''
+python dictionaries to represent objects in the db
+'''
 def continent(name, area, r):
 	cont = {}
 	cont['id'] = r.get_next_id("continent")

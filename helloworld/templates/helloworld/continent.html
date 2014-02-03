@@ -30,7 +30,7 @@
 	      					<h4 class="modal-title">Countries</h4>
 	      				</div><!--modal header-->
 	      				<div class="modal-body">
-	      					{% for country in continent.country_set.all %}
+	      					{% for country in continent.country_set %}
 	      						<a href="{% url 'country_comment'  country.id %}" class="btn btn-default">{{ country.name }}</a>
 	      					{% endfor %}
 	      				</div><!--modal-body-->

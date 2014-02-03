@@ -1,4 +1,5 @@
 from django.shortcuts import render,get_object_or_404
+from django.http import Http404
 from helloworld.models import Continent ,Country, Message
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -17,23 +18,48 @@ def connect_to_redis():
 	r = Redis(host='172.19.140.24', port=6379, db=0)
 	return r
 
-def welcome(request):
+#need continents on every page for navbar
+def get_continents():
 	r = connect_to_redis()
 	continents = r.get_all("continent")
-	canada = r.r.hget("countris:by:name", "Canada")
+
+	for cont in continents:
+		country_set = []
+		ids = r.r.smembers("continent:" + str(cont['id']) + ":countries")
+		for id in ids:
+			country = r.get_json("country:" + id)
+			country_set.append(country)
+		cont['country_set'] = country_set
+
+	return continents
+
+def welcome(request):
+	r = connect_to_redis()
+	continents = get_continents()
+	canada = r.r.hget("countries:by:name", "Canada")
 	return render(request,"helloworld/welcome.html",{"continents": continents, "canada": canada})
 
 
 def continent(request, continent_id):
 	r = connect_to_redis()
-	continents = r.get_all("continent")
-	chosen_continent = get_object_or_404(Continent, pk=continent_id)
+	continents = get_continents()
+	chosen_continent = r.get_json("continent:" + str(continent_id))
+	if not chosen_continent:
+		raise Http404
+
+	country_set = []
+	ids = r.r.smembers("continent:" + str(chosen_continent['id']) + ":countries")
+	for id in ids:
+		country = r.get_json("country:" + id)
+		country_set.append(country)
+	chosen_continent['country_set'] = country_set
+
 	return render(request,"helloworld/continent.html",{"continent":chosen_continent, "continents": continents})
 
 
 def country_comment(request, country_id):
 	r = connect_to_redis()
-	continents = r.get_all("continent")
+	continents = get_continents()
 	chosen_country = get_object_or_404(Country, pk=country_id)
 	messages = chosen_country.message_set.order_by('-pub_date')[:5]
 	return render(request,"helloworld/country_comment.html",{"country":chosen_country, "continents": continents, "messages": messages})
@@ -41,7 +67,7 @@ def country_comment(request, country_id):
 
 def get_message(request,country_id):
 	r = connect_to_redis()
-	continents = r.get_all("continent")
+	continents = get_continents()
 	chosen_country = get_object_or_404(Country, pk=country_id)
 	messages = chosen_country.message_set.order_by('-pub_date')[:5]
 

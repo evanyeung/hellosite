@@ -56,6 +56,15 @@ class Redis(object):
 			i = json.loads(i)
 			return i
 
+	#get and set to be used on key value pairs not related to obj
+	def get(self, key):
+		i = self.get(key)
+		return i
+
+	def set(self, key, value):
+		i = self.set(key, value)
+		return i
+
 	def get_all(self, model):
 		max_id = int(self.r.get(model + ":next:id"))+1
 		lst = []

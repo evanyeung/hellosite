@@ -49,7 +49,7 @@
 	  								<li class="active dropdown">
   										<a  id="drop{{ cont }}" href="{% url 'continent' cont.id %}">{{ cont.name }}</a>
 	  									<ul class="dropdown-menu" role="menu" aria-labelledby="drop{{ cont }}">
-	  										{% for country in cont.country_set.all %}
+	  										{% for country in cont.country_set %}
 	  										<li><a href="{% url 'country_comment' country.id %}">{{ country.name }}</a></li>
 	  										{% endfor %}
 	  									</ul>
@@ -58,7 +58,7 @@
 	  								<li class="dropdown">
   										<a id="drop{{ cont }}" href="{% url 'continent' cont.id %}">{{ cont.name }}</a>
 	  									<ul class="dropdown-menu" role="menu" aria-labelledby="drop{{ cont }}">
-	  										{% for country in cont.country_set.all %}
+	  										{% for country in cont.country_set %}
 	  										<li><a href="{% url 'country_comment' country.id %}">{{ country.name }}</a></li>
 	  										{% endfor %}
 	  									</ul>
