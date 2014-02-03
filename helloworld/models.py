@@ -1,4 +1,5 @@
 from django.db import models
+from cms.models import CMSPlugin
 
 # Create your models here.
 class Continent(models.Model):
@@ -17,10 +18,16 @@ class Country(models.Model):
 		return self.name
 
 class Message(models.Model):
-	country = models.ForeignKey(Country)
+	country = models.ForeignKey(Country,related_name='messages')
 	author = models.CharField(max_length=50)
 	message = models.CharField(max_length=500)
 	pub_date = models.DateTimeField('date published')
 
 	def __unicode__(self):
 		return self.author
+
+class plugincountry(CMSPlugin):
+	country = models.ForeignKey(Country)
+
+	def __unicode__(self):
+		return self.country.name

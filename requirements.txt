@@ -1,5 +1,13 @@
-Django==1.6.1
+Django==1.5.5
+South==0.8.4
 argparse==1.2.1
+django-classy-tags==0.4
+django-cms==2.4.3
+django-mptt==0.5.2
+django-sekizai==0.7
+djangocms-admin-style==0.2.0
+html5lib==0.999
 redis==2.9.1
 simplejson==3.3.2
+six==1.5.2
 wsgiref==0.1.2
