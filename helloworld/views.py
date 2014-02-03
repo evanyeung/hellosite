@@ -19,21 +19,21 @@ def connect_to_redis():
 
 def welcome(request):
 	r = connect_to_redis()
-	continents = Continent.objects.all()
-	canada = Country.objects.get(name="Canada")
+	continents = r.get_all("continent")
+	canada = r.r.hget("countris:by:name", "Canada")
 	return render(request,"helloworld/welcome.html",{"continents": continents, "canada": canada})
 
 
 def continent(request, continent_id):
 	r = connect_to_redis()
-	continents = Continent.objects.all()
+	continents = r.get_all("continent")
 	chosen_continent = get_object_or_404(Continent, pk=continent_id)
 	return render(request,"helloworld/continent.html",{"continent":chosen_continent, "continents": continents})
 
 
 def country_comment(request, country_id):
 	r = connect_to_redis()
-	continents = Continent.objects.all()
+	continents = r.get_all("continent")
 	chosen_country = get_object_or_404(Country, pk=country_id)
 	messages = chosen_country.message_set.order_by('-pub_date')[:5]
 	return render(request,"helloworld/country_comment.html",{"country":chosen_country, "continents": continents, "messages": messages})
@@ -41,7 +41,7 @@ def country_comment(request, country_id):
 
 def get_message(request,country_id):
 	r = connect_to_redis()
-	continents = Continent.objects.all()
+	continents = r.get_all("continent")
 	chosen_country = get_object_or_404(Country, pk=country_id)
 	messages = chosen_country.message_set.order_by('-pub_date')[:5]
 

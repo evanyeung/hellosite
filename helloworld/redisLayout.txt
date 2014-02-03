@@ -11,6 +11,6 @@ z messages:by:date [id]
 s country:[id]:messages [id]
 
 
-continent:next:id [num]
-country:next:id [num]
-message:next:id [num]
+k continent:next:id [num]
+k country:next:id [num]
+k message:next:id [num]

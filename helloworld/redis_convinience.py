@@ -1,6 +1,12 @@
 import redis
 import simplejson as json
 
+'''
+convinent methods when connecting to redis with helloworld app
+Use a r = Redis(args)
+r.r.[command] to execute other commands
+'''
+
 class Redis(object):
 
 	def __init__(self, host, port, db):
@@ -33,7 +39,7 @@ class Redis(object):
 		p = self.r.pipeline()
 		p.set("country:" + str(country['id']), jcountry)
 		p.hset("countries:by:name", country['name'], country['id'])
-		p.sadd("continent:" + str(country['cont_id']) + "countries", country['id'])
+		p.sadd("continent:" + str(country['cont_id']) + ":countries", country['id'])
 		return p.execute()
 
 	def add_message(self, message):
@@ -44,7 +50,17 @@ class Redis(object):
 		p.sadd("country:" + str(message['country_id)']) + "messages", message['id'])
 		return p.execute()
 
-	def get(self, key):
+	def get_json(self, key):
 		i = self.r.get(key)
-		i = json.loads(i)
-		return i
+		if i:
+			i = json.loads(i)
+			return i
+
+	def get_all(self, model):
+		max_id = int(self.r.get(model + ":next:id"))+1
+		lst = []
+		for i in range(1, max_id):
+			j = self.get_json(model + ":" + str(i))
+			if j:
+				lst.append(j)
+		return lst

@@ -7,7 +7,7 @@ def continent(name, area, r):
 	return cont
 
 
-def country(name, population, continent, r):
+def country(name, population, cont_id, r):
 	country = {}
 	country['id'] = r.get_next_id("country")
 	country['name'] = name
