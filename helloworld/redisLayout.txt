@@ -3,8 +3,14 @@ h continent:by:name [name] [id]
 
 k country:[id] [obj]
 h country:by:name [name] [id]
+s continent:[id]:countries [id]
 
 
 k message:[id] [obj]
-s messages:in:country [id]
 z messages:by:date [id]
+s country:[id]:messages [id]
+
+
+continent:next:id [num]
+country:next:id [num]
+message:next:id [num]
