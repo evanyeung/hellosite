@@ -10,21 +10,29 @@ from django.template import Context
 
 import simplejson as json
 from django.core import serializers
-# Create your views here.
+
+from helloworld.redis_convinience import *
+
+def connect_to_redis():
+	r = Redis(host='172.19.140.24', port=6379, db=0)
+	return r
 
 def welcome(request):
+	r = connect_to_redis()
 	continents = Continent.objects.all()
 	canada = Country.objects.get(name="Canada")
 	return render(request,"helloworld/welcome.html",{"continents": continents, "canada": canada})
 
 
 def continent(request, continent_id):
+	r = connect_to_redis()
 	continents = Continent.objects.all()
 	chosen_continent = get_object_or_404(Continent, pk=continent_id)
 	return render(request,"helloworld/continent.html",{"continent":chosen_continent, "continents": continents})
 
 
 def country_comment(request, country_id):
+	r = connect_to_redis()
 	continents = Continent.objects.all()
 	chosen_country = get_object_or_404(Country, pk=country_id)
 	messages = chosen_country.message_set.order_by('-pub_date')[:5]
@@ -32,6 +40,7 @@ def country_comment(request, country_id):
 
 
 def get_message(request,country_id):
+	r = connect_to_redis()
 	continents = Continent.objects.all()
 	chosen_country = get_object_or_404(Country, pk=country_id)
 	messages = chosen_country.message_set.order_by('-pub_date')[:5]
@@ -59,6 +68,8 @@ def ajax(request):
 '''
 
 class ajax(View):
+
+	r = connect_to_redis()
 
 	def post(self, request):
 
