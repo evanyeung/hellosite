@@ -18,11 +18,11 @@ def country(name, population, cont_id, r):
 	return country
 
 
-def message(author, message, country, r):
+def message(author, comment, country_id, pub_date, r):
 	message = {}
 	message['id'] = r.get_next_id("message")
-	message['pub_date'] = get_pub_date() #held in unix time
+	message['pub_date'] = pub_date #held in unix time
 	message['author'] = author
-	message['message'] = message
+	message['comment'] = comment
 	message['country_id'] = country_id
 	return message

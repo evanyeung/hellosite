@@ -43,11 +43,11 @@ class Redis(object):
 		return p.execute()
 
 	def add_message(self, message):
-		jmessage = json.dumps("message")
+		jmessage = json.dumps(message)
 		p = self.r.pipeline()
 		p.set("message:" + str(message['id']), jmessage)
-		p.zadd("messages:by:date", message['date'], message['id'])
-		p.sadd("country:" + str(message['country_id)']) + "messages", message['id'])
+		p.zadd("messages:by:date", message['pub_date'], message['id'])
+		p.sadd("country:" + str(message['country_id']) + ":messages", message['id'])
 		return p.execute()
 
 	def get_json(self, key):
