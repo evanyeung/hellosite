@@ -1,8 +1,6 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render
 from django.http import Http404
-#from helloworld.models import Continent ,Country, Message
-from django.http import HttpResponse, HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 from django.views.generic.base import View
 
 from django.utils import timezone
@@ -13,13 +11,12 @@ from django.template.loader import get_template
 from django.template import Context
 
 import simplejson as json
-from django.core import serializers
 
 from helloworld.redis_convinience import *
 from helloworld import redisModels
 
 def connect_to_redis():
-	r = Redis(host='172.19.140.24', port=6379, db=0)
+	r = Redis(host='172.19.140.44', port=6379, db=0)
 	return r
 
 #need continents on every page for navbar
@@ -112,24 +109,3 @@ class ajax(View):
 		data = t.render(c)
 
 		return HttpResponse( json.dumps(data), content_type='application/json')
-
-'''
-def get_message(request,country_id):
-	r = connect_to_redis()
-	continents = get_continents()
-	chosen_country = r.get_json("country:" + str(country_id))
-	messages = chosen_country.message_set.order_by('-pub_date')[:5]
-
-	if (not request.POST["message_author"]):
-		return render(request, "helloworld/country_comment.html", {"country":chosen_country, "continents": continents, "messages": messages, "error": "You did not enter an author!"})
-	elif(not request.POST["message_message"]):
-		return render(request, "helloworld/country_comment.html", {"country":chosen_country, "continents": continents, "messages": messages, "error": "You did not enter a message!"})
-		
-	new_message = Message(author = request.POST["message_author"],
-						  message = request.POST["message_message"],
-						  country = chosen_country,
-						  pub_date = timezone.now()
-						  )
-	new_message.save()
-	return HttpResponseRedirect(reverse('country_comment', args=(country_id,)))
-'''
