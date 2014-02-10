@@ -1,0 +1,11 @@
+{% load cms_tags sekizai_tags%}
+<!DOCTYPE html>
+<head>
+	{% render_block 'css' %}
+	{% render_block 'js' %}
+	{% addtoblock 'css' %}<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">{% endaddtoblock %}
+</head>
+<body>
+	{% cms_toolbar %}
+	{% placeholder "content" %}
+</body>

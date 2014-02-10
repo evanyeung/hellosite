@@ -1,0 +1,25 @@
+<div>
+	<style>
+	#form-area
+	{
+		padding: 1%;
+		border: 3px solid #d4d4d4;
+		border-radius: 5px;
+	}
+
+	.message-div
+	{
+		border-left: 3px solid #d4d4d4
+	}
+	</style>
+	{% for message in messages %}
+	<div class="row">
+		<div class="col-md-10 col-md-offset-2 message-div">
+			<h3>Author:{{ message.author }}</h3>
+			<p>Message:{{ message.comment }}</p>
+			<p>date posted:{{ message.pub_date }}</p>
+		</div>
+	</div><!--row-->
+	<br/>
+	{% endfor %}
+</div>
