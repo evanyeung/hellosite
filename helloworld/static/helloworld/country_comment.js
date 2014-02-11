@@ -38,9 +38,13 @@ $( document ).ready(function() {
 		.always(function() {
 			console.log("complete");
 		}); */
-		var url = 'localhost:8000/helloworld/ajax/';
+		var url = '../../ajax/';
 		var form_data = $('form').serialize();
+<<<<<<< HEAD
 		$.post('http://localhost:8000/helloworld/ajax/', form_data, function( data, status ) {	
+=======
+		$.post('../../ajax/', form_data, function( data, status ) {	
+>>>>>>> 6fca889bdf4601275ca74f9ad46bac3e80ee0933
 			$('form').each( function() {
 				this.reset();
 			});
